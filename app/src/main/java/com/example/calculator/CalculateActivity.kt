@@ -2,112 +2,113 @@ package com.example.calculator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import com.example.calculator.databinding.ActivityCalculateBinding
 import java.lang.NumberFormatException
 import kotlin.math.roundToInt
 
+
+
 class CalculateActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityCalculateBinding
+    private lateinit var binding: ActivityCalculateBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_calculate)
+        binding = ActivityCalculateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val button = binding.button
-        when (val operation = intent.getStringExtra("operation")) {
-            "add" -> {
-                button.text = getString(R.string.add)
+        when (intent.getSerializableExtra(OPERATION)) {
+            Operation.ADD -> {
+                button.text = getString(R.string.button_add)
                 button.setOnClickListener {
-                    val operand1 = getOperand1()
-                    val operand2 = getOperand2()
-                    if(operand1 != "" && operand2 != "") {
-                        val result = operand1.toFloat() + operand2.toFloat()
-                        returnResult(result,operand1,operand2,operation)
-                    }
+                    calculate(Operation.ADD)
                 }
             }
-                "subtract" -> {
-                    button.text = getString(R.string.subtract)
-                    button.setOnClickListener {
-                        val operand1 = getOperand1()
-                        val operand2 = getOperand2()
-                        if (operand1 != "" && operand2 != "") {
-                            val result = operand1.toFloat() - operand2.toFloat()
-                            returnResult(result,operand1,operand2,operation)
-                        }
+            Operation.SUBTRACT -> {
+                button.text = getString(R.string.button_subtract)
+                button.setOnClickListener {
+                    calculate(Operation.SUBTRACT)
                     }
                 }
-            "multiply" -> {
-                button.text = getString(R.string.multiply)
+            Operation.MULTIPLY -> {
+                button.text = getString(R.string.button_multiply)
                 button.setOnClickListener {
-                    val operand1 = getOperand1()
-                    val operand2 = getOperand2()
-                    if (operand1 != "" && operand2 != "") {
-                        val result = operand1.toFloat() * operand2.toFloat()
-                        returnResult(result,operand1,operand2,operation)
+                    calculate(Operation.MULTIPLY)
                     }
                 }
-            }
-            "divide" -> {
-                button.text = getString(R.string.divide)
+            Operation.DIVIDE -> {
+                button.text = getString(R.string.button_divide)
                 button.setOnClickListener {
-                    val operand1 = getOperand1()
-                    val operand2 = getOperand2()
-                    if (operand1 != "" && operand2 != "" ) {
-                        if(operand2.toInt() !=0) {
-                            val result = operand1.toFloat() / operand2.toFloat()
-                            returnResult(result,operand1,operand2,operation)
-                        }
-                        else {
-                            Toast.makeText(applicationContext,"A number cannot be divided by 0",Toast.LENGTH_SHORT).show()
+                    calculate(Operation.DIVIDE)
                         }
                     }
                 }
             }
-        }
-    }
-   private fun returnResult(result : Float, operand1 : String, operand2 : String, operation : String){
-        if(result - result.toInt() > 0)
-            intent.putExtra("Result", result.toString())
-        else
-            intent.putExtra("Result", result.roundToInt().toString())
-        intent.putExtra("Operand_1", operand1)
-        intent.putExtra("Operand_2", operand2)
-        intent.putExtra("Operation", operation)
+
+    private fun returnResult(result: Float, operand1: String, operand2: String, operation: String) {
+        if (result - result.toInt() > 0)
+            intent.putExtra(RESULT, result.toString())
+            else
+            intent.putExtra(RESULT, result.roundToInt().toString())
+        intent.putExtra(OPERAND_1, operand1)
+        intent.putExtra(OPERAND_2, operand2)
+        intent.putExtra(OPERATION, operation)
         setResult(RESULT_OK, intent)
         finish()
     }
-    private fun getOperand1() : String {
+
+    private fun getOperand1(): String {
         try {
             val operand1 = binding.operand1.text.toString().toFloat()
-            return if(operand1 - operand1.toInt() > 0 )
+            return if (operand1 - operand1.toInt() > 0)
                 operand1.toString()
             else
                 operand1.roundToInt().toString()
 
         } catch (e: NumberFormatException) {
             Toast.makeText(
-                applicationContext,
-                "please enter a valid Number",
+                this,
+                getString(R.string.toast_valid_input),
                 Toast.LENGTH_SHORT
             ).show()
         }
-       return ""
+        return ""
     }
+
     private fun getOperand2(): String {
         try {
-                val operand2 = binding.operand2.text.toString().toFloat()
-                return if(operand2 - operand2.toInt() > 0 )
-                    operand2.toString()
-                else
-                    operand2.roundToInt().toString()
+            val operand2 = binding.operand2.text.toString().toFloat()
+            return if (operand2 - operand2.toInt() > 0)
+                operand2.toString()
+            else
+                operand2.roundToInt().toString()
 
-            } catch (e: NumberFormatException) {
-                Toast.makeText(
-                    applicationContext,
-                    "please enter a valid Number",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            return ""
+        } catch (e: NumberFormatException) {
+            Toast.makeText(
+                this,
+                getString(R.string.toast_valid_input),
+                Toast.LENGTH_SHORT
+            ).show()
         }
+        return ""
+    }
+
+    private fun calculate(operation: Operation) {
+        val operand1: String = getOperand1()
+        val operand2: String = getOperand2()
+        if (operand1.isNotEmpty() && operand2.isNotEmpty()) {
+            if(operation == Operation.DIVIDE && operand2.toFloat() == 0.0f)
+            {
+                Toast.makeText(this,getString(R.string.toast_divide_error_message),Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val result = when (operation) {
+                    Operation.ADD -> operand1.toFloat() + operand2.toFloat()
+                    Operation.SUBTRACT -> operand1.toFloat() - operand2.toFloat()
+                    Operation.MULTIPLY -> operand1.toFloat() * operand2.toFloat()
+                    Operation.DIVIDE -> operand1.toFloat() / operand2.toFloat()
+                }
+                returnResult(result, operand1, operand2, operation.name)
+            }
+
+        }
+    }
 }
