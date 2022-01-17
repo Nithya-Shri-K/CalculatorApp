@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     modifyActivityToDisplayResult()
-                    binding.resultText.text = getString(R.string.text_result,result.data?.getStringExtra("result"),result.data?.getStringExtra("operand_1"),result.data?.getStringExtra("operand_2"),result.data?.getStringExtra("operation"))
+                    binding.resultText.text = getString(R.string.text_result,result.data?.getStringExtra(RESULT),result.data?.getStringExtra(OPERAND_1),result.data?.getStringExtra(OPERAND_2),result.data?.getStringExtra(OPERATION))
                 }
             }
         binding.add.setOnClickListener { launchActivity(Operation.ADD,getResult,intent) }
