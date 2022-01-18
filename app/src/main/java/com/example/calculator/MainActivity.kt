@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.resultViews.visibility= View.GONE
         val intent = Intent(this, CalculateActivity::class.java)
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-       if(savedInstanceState.getInt(IS_RESULT_PAGE)==1){
-           modifyActivityToDisplayResult()
+        if(savedInstanceState.getInt(IS_RESULT_PAGE)==1){
+            modifyActivityToDisplayResult()
            binding.resultText.text = savedInstanceState.getString(RESULT)
 
        }
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if(binding.resultText.visibility == View.VISIBLE) {
+        if(binding.resultViews.visibility == View.VISIBLE) {
             outState.putInt(IS_RESULT_PAGE, 1)
             outState.putString(RESULT, binding.resultText.text.toString())
         }

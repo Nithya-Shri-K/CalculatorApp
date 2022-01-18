@@ -6,8 +6,8 @@
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         android:visibility="visible"
         tools:context=".MainActivity">
 
@@ -16,21 +16,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:visibility="gone"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_vertical"
+    android:gravity="center_horizontal"
+    android:visibility="gone">
         <TextView
             android:id="@+id/resultText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:gravity="center_horizontal"
             android:textSize="25sp" />
         <Button
             android:id="@+id/reset"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:text="@string/button_reset" />
 </LinearLayout>
@@ -39,7 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
+            android:visibility="visible"
+            android:layout_gravity="center_vertical">
 
         <Button
             android:id="@+id/add"
@@ -57,21 +57,32 @@
             android:layout_marginTop="16dp"
             android:text="@string/button_subtract" />
 
-        <Button
-            android:id="@+id/multiply"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:text="@string/button_multiply" />
 
-        <Button
-            android:id="@+id/divide"
-            android:layout_width="150dp"
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:text="@string/button_divide" />
+                android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:visibility="visible"
+            android:layout_gravity="center_vertical"
+                >
+                <Button
+                    android:id="@+id/multiply"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/button_multiply" />
+
+                <Button
+                    android:id="@+id/divide"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/button_divide" />
+
         </LinearLayout>
 
 
