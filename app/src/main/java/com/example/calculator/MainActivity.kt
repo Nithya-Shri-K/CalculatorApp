@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             binding.resultText.text=""
         }
     }
-    private fun launchActivity(operation: Operation, getResult : ActivityResultLauncher<Intent>,intent : Intent ){
+    private fun launchActivity(operation: Operation, getResult : ActivityResultLauncher<Intent>, intent : Intent ){
         intent.putExtra(OPERATION,operation)
         getResult.launch(intent)
     }

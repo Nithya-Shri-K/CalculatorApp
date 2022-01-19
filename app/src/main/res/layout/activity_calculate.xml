@@ -17,7 +17,8 @@
         android:layout_marginLeft="16dp"
         android:inputType="numberDecimal"
         android:layout_gravity="center_horizontal"
-        android:text="" />
+        android:text=""
+        android:textAlignment="center"/>
 
     <EditText
         android:id="@+id/operand2"
@@ -28,7 +29,8 @@
         android:layout_marginLeft="16dp"
         android:inputType="numberDecimal"
         android:layout_gravity="center_horizontal"
-        android:text="" />
+        android:text=""
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/button"
