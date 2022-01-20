@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:visibility="visible"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        >
 
 <LinearLayout
     android:id="@+id/result_views"
@@ -72,7 +73,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:text="@string/button_divide" />
+
         </LinearLayout>
 
 
     </LinearLayout>
+
+
