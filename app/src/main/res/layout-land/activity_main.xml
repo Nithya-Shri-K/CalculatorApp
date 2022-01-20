@@ -44,7 +44,7 @@
         <Button
             android:id="@+id/add"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:text="@string/button_add" />
@@ -52,7 +52,7 @@
         <Button
             android:id="@+id/subtract"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:text="@string/button_subtract" />
@@ -70,7 +70,7 @@
                 <Button
                     android:id="@+id/multiply"
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:text="@string/button_multiply" />
@@ -78,7 +78,7 @@
                 <Button
                     android:id="@+id/divide"
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:text="@string/button_divide" />
